@@ -21,42 +21,38 @@ public class Task extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
-	private static final long		serialVersionUID	= 1L;
+	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
 	@Valid
 	@Automapped
-	private Type					type;
+	private Type				type;
 
 	@Mandatory
 	@ValidLongText
 	@Automapped
-	private String					description;
+	private String				description;
 
 	@Mandatory
 	@ValidNumber(min = 0, max = 10)
 	@Automapped
-	private Double					priority;
+	private Double				priority;
 
 	@Mandatory
 	@ValidNumber(min = 0, max = 1000)
 	@Automapped
-	private Double					estimatedDuration;
+	private Double				estimatedDuration;
 
 	@Mandatory
 	// HINT: @Valid by default.
 	@Automapped
-	private boolean					draftMode;
+	private boolean				draftMode;
 
 	// Relationships ----------------------------------------------------------
 
 	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
-	private Technician				technician;
+	private Technician			technician;
 
-	@Mandatory
-	@Valid
-	@ManyToOne(optional = false)
-	private MaintenanceRecordTask	maintenanceRecordTask;
 }
