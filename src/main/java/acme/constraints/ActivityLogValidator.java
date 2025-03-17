@@ -31,7 +31,7 @@ public class ActivityLogValidator extends AbstractValidator<ValidActivityLog, Ac
 		else {
 			boolean fechaTrasLeg;
 
-			fechaTrasLeg = MomentHelper.isAfterOrEqual(activityLog.getRegistrationMoment(), activityLog.getFlightAssigment().getLeg().getScheduledArrival());
+			fechaTrasLeg = MomentHelper.isAfterOrEqual(activityLog.getRegistrationMoment(), activityLog.getFlightAssignment().getLeg().getScheduledArrival());
 			super.state(context, fechaTrasLeg, "fechaActivityLog", "acme.validation.activityLog.beforeLeg");
 		}
 		result = !super.hasErrors(context);
