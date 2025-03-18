@@ -68,6 +68,14 @@ public class TechnicianMaintenanceRecordTaskCreateService extends AbstractGuiSer
 	public void validate(final MaintenanceRecordTask object) {
 		assert object != null;
 
+		if (!super.getBuffer().getErrors().hasErrors()) {
+			super.state(object.getMaintenanceRecord().getTechnician().equals(object.getMaintenanceRecord().getTechnician()), "maintenanceRecord", "technician.maintenance-record-task.form.error.not-same-maintenance-record");
+
+			MaintenanceRecordTask mrt;
+			mrt = this.repository.findOneMaintenanceRecordTaskByMaintenanceRecordAndTaskId(object.getMaintenanceRecord().getId(), object.getTask().getId());
+			super.state(mrt == null, "*", "technician.maintenance-record-task.form.error.existing-m-r-t");
+		}
+
 	}
 
 	@Override

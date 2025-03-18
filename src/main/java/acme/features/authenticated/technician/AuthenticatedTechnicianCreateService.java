@@ -1,5 +1,5 @@
 /*
- * AuthenticatedTechnicianUpdateService.java
+ * AuthenticatedTechnicianCreateService.java
  *
  * Copyright (C) 2012-2025 Rafael Corchuelo.
  *
@@ -10,74 +10,81 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.authenticated.consumer;
+package acme.features.authenticated.technician;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.principals.Authenticated;
+import acme.client.components.principals.UserAccount;
 import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.realms.Consumer;
+import acme.realms.Technician;
 
 @GuiService
-public class AuthenticatedConsumerUpdateService extends AbstractGuiService<Authenticated, Consumer> {
+public class AuthenticatedTechnicianCreateService extends AbstractGuiService<Authenticated, Technician> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AuthenticatedConsumerRepository repository;
+	private AuthenticatedTechnicianRepository repository;
 
-	// AbstractService interface ----------------------------------------------ç
+	// AbstractService<Authenticated, Consumer> ---------------------------
 
 
 	@Override
 	public void authorise() {
 		boolean status;
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(Consumer.class);
+		status = !super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
 
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Consumer object;
+		Technician object;
 		int userAccountId;
+		UserAccount userAccount;
 
 		userAccountId = super.getRequest().getPrincipal().getAccountId();
-		object = this.repository.findConsumerByUserAccountId(userAccountId);
+		userAccount = this.repository.findUserAccountById(userAccountId);
+
+		object = new Technician();
+		object.setUserAccount(userAccount);
 
 		super.getBuffer().addData(object);
 	}
 
 	@Override
-	public void bind(final Consumer object) {
+	public void bind(final Technician object) {
 		assert object != null;
 
-		super.bindObject(object, "company", "sector");
+		super.bindObject(object, "licenseNumber", "phoneNumber", "specialisation", "annualHealthTest", "yearsOfExperience", "certifications");
+
+		if (object.getCertifications() == "")
+			object.setCertifications(null);
 	}
 
 	@Override
-	public void validate(final Consumer object) {
+	public void validate(final Technician object) {
 		assert object != null;
 	}
 
 	@Override
-	public void perform(final Consumer object) {
+	public void perform(final Technician object) {
 		assert object != null;
 
 		this.repository.save(object);
 	}
 
 	@Override
-	public void unbind(final Consumer object) {
-		assert object != null;
-
+	public void unbind(final Technician object) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(object, "company", "sector");
+		dataset = super.unbindObject(object, "licenseNumber", "phoneNumber", "specialisation", "annualHealthTest", "yearsOfExperience", "certifications");
+
 		super.getResponse().addData(dataset);
 	}
 

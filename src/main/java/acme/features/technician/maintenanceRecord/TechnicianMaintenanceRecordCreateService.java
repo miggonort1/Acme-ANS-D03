@@ -74,6 +74,7 @@ public class TechnicianMaintenanceRecordCreateService extends AbstractGuiService
 			minimumStart = MomentHelper.deltaFromMoment(minimumStart, 59, ChronoUnit.MINUTES);
 			super.state(MomentHelper.isAfter(object.getInspectionDueDate(), minimumStart), "inspectionDueDate", "technician.maintenance-record.form.error.bad-date");
 		}
+
 	}
 
 	@Override

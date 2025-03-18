@@ -23,8 +23,8 @@
 	<acme:input-money code="technician.maintenance-record.form.label.estimatedCost" path="estimatedCost"/>
 	<acme:input-textbox code="technician.maintenance-record.form.label.note" path="note"/>
 	<jstl:choose>
-		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') }">
-	 <acme:input-moment code="technician.maintenance-record.form.label.execution" path="moment" readonly="true" />
+		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode==false }">
+	 <acme:button code="technician.task.list.title" action="/technician/task/list-maintenance-record?masterId=${id}"/>
 	 </jstl:when>
 	</jstl:choose>
 	
@@ -33,6 +33,7 @@
 		<acme:submit  code="technician.maintenance-record.form.button.create" action="/technician/maintenance-record/create"/>
 	</jstl:when>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode==true }">
+	 <acme:input-moment code="technician.maintenance-record.form.label.execution" path="moment" readonly="true" />
 		<acme:submit  code="technician.maintenance-record.form.button.update" action="/technician/maintenance-record/update"/>
 		<acme:submit  code="technician.maintenance-record.form.button.publish" action="/technician/maintenance-record/publish"/>
 		<acme:submit  code="technician.maintenance-record.form.button.delete" action="/technician/maintenance-record/delete"/>

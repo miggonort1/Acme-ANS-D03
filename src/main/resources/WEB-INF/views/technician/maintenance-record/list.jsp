@@ -16,7 +16,7 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code="technician.maintenance-record.list.label.status" path="status" width="80%"/>	
+<acme:list-column code="technician.maintenance-record.list.label.inspectionDueDate" path="inspectionDueDate" width="80%"/>
 </acme:list>
 
 	<jstl:if test="${_command == 'list-mine'}">

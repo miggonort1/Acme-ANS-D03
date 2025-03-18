@@ -15,6 +15,7 @@ import acme.client.services.GuiService;
 import acme.entities.aircraft.Aircraft;
 import acme.entities.maintenancerecord.MaintenanceRecord;
 import acme.entities.maintenancerecord.Status;
+import acme.entities.maintenancerecord.Task;
 import acme.realms.Technician;
 
 @GuiService
@@ -72,6 +73,22 @@ public class TechnicianMaintenanceRecordPublishService extends AbstractGuiServic
 			minimumStart = MomentHelper.deltaFromMoment(minimumStart, 23, ChronoUnit.HOURS);
 			minimumStart = MomentHelper.deltaFromMoment(minimumStart, 59, ChronoUnit.MINUTES);
 			super.state(MomentHelper.isAfter(object.getInspectionDueDate(), minimumStart), "inspectionDueDate", "technician.maintenance-record.form.error.bad-date");
+		}
+		{
+			Collection<Task> tasks;
+			boolean allPublished;
+
+			tasks = this.repository.findManyTaskByMaintenanceRecordId(object.getId());
+			allPublished = tasks.stream().allMatch(task -> !task.isDraftMode());
+			super.state(allPublished, "*", "technician.maintenance-record.form.error.task");
+		}
+		{
+			Collection<Task> tasks;
+			boolean existsUserStories;
+
+			tasks = this.repository.findManyTaskByMaintenanceRecordId(object.getId());
+			existsUserStories = tasks.size() > 0;
+			super.state(existsUserStories, "*", "technician.maintenance-record.form.error.existsTasks");
 		}
 	}
 
