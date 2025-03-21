@@ -49,7 +49,7 @@ public class FlightAssignment extends AbstractEntity {
 	@Optional
 	@ValidString(max = 255)
 	@Automapped
-	private String				marks;
+	private String				remarks;
 
 	// Relationships ----------------------------------------------------------
 
