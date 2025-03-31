@@ -54,7 +54,7 @@ public class MaintenanceRecord extends AbstractEntity {
 	@Optional
 	@ValidLongText
 	@Automapped
-	private String				note;
+	private String				notes;
 
 	@Mandatory
 	// HINT: @Valid by default.

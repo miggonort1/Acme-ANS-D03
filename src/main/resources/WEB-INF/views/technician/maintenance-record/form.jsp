@@ -21,7 +21,7 @@
 	 <acme:input-select code="technician.maintenance-record.form.label.status" path="status" choices="${status}" />
 	<acme:input-moment code="technician.maintenance-record.form.label.inspectionDueDate" path="inspectionDueDate"/>
 	<acme:input-money code="technician.maintenance-record.form.label.estimatedCost" path="estimatedCost"/>
-	<acme:input-textbox code="technician.maintenance-record.form.label.note" path="note"/>
+	<acme:input-textbox code="technician.maintenance-record.form.label.notes" path="notes"/>
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode==false }">
 	 <acme:button code="technician.task.list.title" action="/technician/task/list-maintenance-record?masterId=${id}"/>

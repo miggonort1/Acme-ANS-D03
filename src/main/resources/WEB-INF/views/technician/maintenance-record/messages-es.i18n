@@ -15,7 +15,7 @@ technician.maintenance-record.form.label.aircraft= Aeronave
 technician.maintenance-record.form.label.status= Estado
 technician.maintenance-record.form.label.inspectionDueDate= Fecha de inspección límite
 technician.maintenance-record.form.label.estimatedCost= Coste estimado
-technician.maintenance-record.form.label.note= Notas
+technician.maintenance-record.form.label.notes= Notas
 
 technician.maintenance-record.form.label.execution= Momento de ejecución
 
