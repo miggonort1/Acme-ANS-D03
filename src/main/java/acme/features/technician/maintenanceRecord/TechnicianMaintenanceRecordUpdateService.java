@@ -52,13 +52,13 @@ public class TechnicianMaintenanceRecordUpdateService extends AbstractGuiService
 		assert object != null;
 		Aircraft aircraft;
 		int aircraftId;
-		super.bindObject(object, "status", "inspectionDueDate", "estimatedCost", "note", "aircraft");
+		super.bindObject(object, "status", "inspectionDueDate", "estimatedCost", "notes", "aircraft");
 
 		aircraftId = super.getRequest().getData("aircraft", int.class);
 		aircraft = this.repository.findOneAircraftById(aircraftId);
 		object.setAircraft(aircraft);
-		if (object.getNote() == "")
-			object.setNote(null);
+		if (object.getNotes() == "")
+			object.setNotes(null);
 	}
 
 	@Override
