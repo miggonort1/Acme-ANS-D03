@@ -6,11 +6,9 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
-import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claim.Claim;
-import acme.entities.claim.Type;
 import acme.realms.Agent;
 
 @GuiService
@@ -22,7 +20,10 @@ public class AgentClaimListMineService extends AbstractGuiService<Agent, Claim> 
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		status = super.getRequest().getPrincipal().hasRealmOfType(Agent.class);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -38,12 +39,8 @@ public class AgentClaimListMineService extends AbstractGuiService<Agent, Claim> 
 	@Override
 	public void unbind(final Claim object) {
 		Dataset dataset;
-		SelectChoices choicesType;
 
-		choicesType = SelectChoices.from(Type.class, object.getType());
-		dataset = super.unbindObject(object, "registrationMoment", "description");
-		dataset.put("type", choicesType);
-		super.addPayload(dataset, object, "passengerEmail", "indicatorLabel");
+		dataset = super.unbindObject(object, "registrationMoment", "description", "type", "status");
 		super.getResponse().addData(dataset);
 	}
 

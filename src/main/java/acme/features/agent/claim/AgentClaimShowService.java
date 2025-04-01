@@ -1,6 +1,8 @@
 
 package acme.features.agent.claim;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -8,7 +10,9 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claim.Claim;
+import acme.entities.claim.ClaimStatus;
 import acme.entities.claim.Type;
+import acme.entities.flight.Leg;
 import acme.realms.Agent;
 
 @GuiService
@@ -23,11 +27,15 @@ public class AgentClaimShowService extends AbstractGuiService<Agent, Claim> {
 	public void authorise() {
 		boolean status;
 		int claimId;
+		int agentId;
 		Claim claim;
+		Agent agent;
 
+		agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		agent = this.repository.findOneAgentById(agentId);
 		claimId = super.getRequest().getData("id", int.class);
 		claim = this.repository.findClaimById(claimId);
-		status = claim != null && (!claim.isDraftMode() || super.getRequest().getPrincipal().hasRealm(claim.getAgent()));
+		status = claim != null && (!claim.isDraftMode() || super.getRequest().getPrincipal().hasRealm(claim.getAgent())) && claim.getAgent().equals(agent);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -48,10 +56,22 @@ public class AgentClaimShowService extends AbstractGuiService<Agent, Claim> {
 
 		Dataset dataset;
 		SelectChoices choicesType;
+		SelectChoices choicesStatus;
+		SelectChoices choicesLegs;
+
+		Collection<Leg> legs;
+		legs = this.repository.findManyLegsPublished();
 
 		choicesType = SelectChoices.from(Type.class, object.getType());
-		dataset = super.unbindObject(object, "registrationMoment", "description", "passengerEmail", "indicatorLabel", "draftMode");
+		choicesStatus = SelectChoices.from(ClaimStatus.class, object.getStatus());
+		choicesLegs = SelectChoices.from(legs, "flightNumber", object.getLeg());
+
+		dataset = super.unbindObject(object, "registrationMoment", "description", "passengerEmail", "status", "type", "draftMode");
 		dataset.put("type", choicesType);
+		dataset.put("status", choicesStatus);
+		dataset.put("legFlightNumber", object.getLeg().getFlightNumber());
+		dataset.put("legs", choicesLegs);
+		dataset.put("leg", choicesLegs.getSelected().getKey());
 		super.getResponse().addData(dataset);
 	}
 }

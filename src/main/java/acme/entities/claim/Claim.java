@@ -50,9 +50,9 @@ public class Claim extends AbstractEntity {
 	private Type				type;
 
 	@Mandatory
-	// HINT: @Valid by default.
+	@Valid
 	@Automapped
-	private boolean				indicator;
+	private ClaimStatus			status;
 
 	@Mandatory
 	// HINT: @Valid by default.
@@ -70,8 +70,4 @@ public class Claim extends AbstractEntity {
 	@ManyToOne(optional = false)
 	private Leg					leg;
 
-
-	public String getIndicatorLabel() {
-		return this.indicator ? "Aceptado" : "No Aceptado";
-	}
 }

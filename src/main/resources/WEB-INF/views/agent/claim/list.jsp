@@ -16,9 +16,11 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code="agent.claim.list.label.registrationMoment" path="registrationMoment" width="30%"/>
-	<acme:list-column code="agent.claim.list.label.description" path="description" width="70%"/>
-	<acme:list-payload path="payload"/>
+	<!-- De momento el campo descripcion queda comentado por el bug de la aplicacion con el width -->
+	<%-- <acme:list-column code="agent.claim.list.label.description" path="description" width="25%"/> --%>
+	<acme:list-column code="agent.claim.list.label.registrationMoment" path="registrationMoment" width="25%"/>
+	<acme:list-column code="agent.claim.list.label.type" path="type" width="25%"/>
+	<acme:list-column code="agent.claim.list.label.status" path="status" width="25%"/>
 </acme:list>
 
 	<jstl:if test="${_command == 'list-mine'}">

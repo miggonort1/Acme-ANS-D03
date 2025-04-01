@@ -16,12 +16,12 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-
-	<acme:input-moment code="agent.claim.form.label.registrationMoment" path="registrationMoment"/>
+	<acme:input-select code="agent.claim.form.label.leg" path="leg" choices="${legs}" />
+	<acme:input-moment code="agent.claim.form.label.registrationMoment" path="registrationMoment" readonly="true"/>
 	<acme:input-email code="agent.claim.form.label.passengerEmail" path="passengerEmail"/>
 	<acme:input-textbox code="agent.claim.form.label.description" path="description"/>
 	<acme:input-select code="agent.claim.form.label.type" path="type" choices="${type}" />
-	<acme:input-textbox code="agent.claim.form.label.indicator" path="indicatorLabel"/>
+	<acme:input-select code="agent.claim.form.label.status" path="status" choices="${status}" />
 	<jstl:choose>
 	<jstl:when test="${_command == 'create'}">
 		<acme:submit  code="agent.claim.form.button.create" action="/agent/claim/create?masterId=${masterId}"/>

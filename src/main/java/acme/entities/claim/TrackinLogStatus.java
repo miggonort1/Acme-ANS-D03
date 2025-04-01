@@ -1,7 +1,7 @@
 
 package acme.entities.claim;
 
-public enum Status {
+public enum TrackinLogStatus {
 
 	PENDING, ACCEPTED, REJECTED
 }
