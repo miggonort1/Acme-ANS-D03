@@ -19,13 +19,16 @@ public class AgentClaimController extends AbstractGuiController<Agent, Claim> {
 	@Autowired
 	private AgentClaimShowService		showService;
 
+	@Autowired
+	private AgentClaimCreateService		createService;
+
 	// Constructors -----------------------------------------------------------
 
 
 	@PostConstruct
 	protected void initialise() {
 		super.addBasicCommand("show", this.showService);
-		//		super.addBasicCommand("create", this.createService);
+		super.addBasicCommand("create", this.createService);
 		//		super.addBasicCommand("update", this.updateService);
 		//		super.addBasicCommand("delete", this.deleteService);
 
