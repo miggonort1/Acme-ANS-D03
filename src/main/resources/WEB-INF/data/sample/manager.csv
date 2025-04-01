@@ -1,3 +1,4 @@
-key,key:userAccount,identifierNumber,yearsOfExperience,birthDate,picture
-manager-01,user-account-manager-01,EL288805,13,2001/06/26 12:59,https://i.imgur.com/8YcXhS0.png
-manager-02,user-account-manager-02,RIN389742,10,2002/11/12 09:30,https://i.imgur.com/8YcXhS1.png
+key,key:userAccount,identifierNumber,years,dateOfBirth,link,key:airline
+manager-01,user-account-manager-01,"AM184737",7,2000/06/18 00:00,"http://lorem.com/ipsum",airline-01
+manager-02,user-account-manager-02,"DH458796",12,2000/05/17 00:00,"http://example.org/a/b?”",airline-01
+manager-03,user-account-manager-03,"FO454396",6,2001/04/16 00:00,"ftp://a.b",airline-01
