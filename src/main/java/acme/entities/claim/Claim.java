@@ -63,4 +63,9 @@ public class Claim extends AbstractEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	private Agent				agent;
+
+
+	public String getIndicatorLabel() {
+		return this.indicator ? "Aceptado" : "No Aceptado";
+	}
 }

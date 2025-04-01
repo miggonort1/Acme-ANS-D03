@@ -50,6 +50,9 @@
 			<acme:menu-suboption code="master.menu.technician.my-tasks" action="/technician/task/list-mine"/>
 			<acme:menu-separator/>	
 		</acme:menu-option>
+		<acme:menu-option code="master.menu.agent" access="hasRealm('Agent')">
+			<acme:menu-suboption code="master.menu.agent.my-claim" action="/agent/claim/list-mine"/>
+		</acme:menu-option>
 		<acme:menu-option code="master.menu.user-account" access="isAuthenticated">
 			<acme:menu-suboption code="master.menu.technician.all-maintenance-record" action="/technician/maintenance-record/list-all"/>
 			<acme:menu-separator/>
