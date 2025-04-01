@@ -28,4 +28,6 @@ public interface AuthenticatedTechnicianRepository extends AbstractRepository {
 	@Query("select t from Technician t where t.userAccount.id = :id")
 	Technician findTechnicianByUserAccountId(int id);
 
+	@Query("select t from Technician t where t.licenseNumber = :licenseNumber")
+	Technician findOneTechnicianByLicenseNumber(String licenseNumber);
 }

@@ -50,8 +50,8 @@ public class TechnicianMaintenanceRecordTaskListService extends AbstractGuiServi
 		Dataset dataset;
 
 		dataset = super.unbindObject(object, "version");
-		dataset.put("maintenanceRecord", object.getMaintenanceRecord().getId());
-		dataset.put("task", object.getTask().getId());
+		dataset.put("maintenanceRecord", object.getMaintenanceRecord().getInspectionDueDate());
+		dataset.put("task", object.getTask().getDescription());
 
 		super.getResponse().addData(dataset);
 	}

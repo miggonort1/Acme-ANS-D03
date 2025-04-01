@@ -44,7 +44,7 @@ public class TechnicianMaintenanceRecordListMineService extends AbstractGuiServi
 		SelectChoices choicesStatus;
 
 		choicesStatus = SelectChoices.from(Status.class, object.getStatus());
-		dataset = super.unbindObject(object, "status", "inspectionDueDate");
+		dataset = super.unbindObject(object, "notes", "inspectionDueDate");
 
 		dataset.put("status", choicesStatus);
 		super.getResponse().addData(dataset);

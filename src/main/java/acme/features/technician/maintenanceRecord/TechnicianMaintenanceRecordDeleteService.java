@@ -46,7 +46,7 @@ public class TechnicianMaintenanceRecordDeleteService extends AbstractGuiService
 	public void bind(final MaintenanceRecord object) {
 		assert object != null;
 
-		super.bindObject(object, "status", "inspectionDueDate", "estimatedCost", "note", "aircraft");
+		super.bindObject(object, "status", "inspectionDueDate", "estimatedCost", "notes", "aircraft");
 
 	}
 
