@@ -1,14 +1,14 @@
 
-package acme.realms;
+package acme.realms.manager;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractRole;
 import acme.client.components.mappings.Automapped;
@@ -18,38 +18,47 @@ import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
+import acme.constraints.ValidManager;
+import acme.entities.airline.Airline;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@ValidManager
 public class Manager extends AbstractRole {
-	// Serialisation identifier -----------------------------------------------
 
+	// Serialisation identifier
 	private static final long	serialVersionUID	= 1L;
 
-	// Attributes -------------------------------------------------------------
-
+	// Attributes
 	@Mandatory
+	@ValidString(pattern = "^[A-Z]{2,3}\\d{6}$", message = "{validation.manager.identifierNumber}")
 	@Column(unique = true)
-	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
 	private String				identifierNumber;
 
 	@Mandatory
-	@ValidNumber(min = 1, max = 80)
+	@ValidNumber(min = 0, max = 120)
 	@Automapped
-	private Integer				yearsOfExperience;
+	private int					years;
 
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
-	private Date				birthDate;
+	private Date				dateOfBirth;
 
 	@Optional
 	@ValidUrl
 	@Automapped
-	private String				picture;
+	private String				link;
+
+	// Derived attributes
+
+	// Relationships
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Airline				airline;
 
 }
