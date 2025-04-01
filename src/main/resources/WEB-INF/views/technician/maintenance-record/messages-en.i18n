@@ -11,6 +11,7 @@
 technician.maintenance-record.list.title= Maintenance Record
 technician.maintenance-record.list.button.create= Create
 technician.maintenance-record.list.label.inspectionDueDate= Inspection due date
+technician.maintenance-record.list.label.notes= Notes
 technician.maintenance-record.form.label.aircraft= Aircraft
 technician.maintenance-record.form.label.status= Status
 technician.maintenance-record.form.label.inspectionDueDate= Inspection due date
