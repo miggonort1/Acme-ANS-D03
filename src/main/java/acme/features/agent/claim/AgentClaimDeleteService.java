@@ -11,15 +11,19 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claim.Claim;
 import acme.entities.claim.ClaimStatus;
+import acme.entities.claim.TrackingLog;
 import acme.entities.claim.Type;
 import acme.entities.flight.Leg;
 import acme.realms.Agent;
 
 @GuiService
-public class AgentClaimUpdateService extends AbstractGuiService<Agent, Claim> {
+public class AgentClaimDeleteService extends AbstractGuiService<Agent, Claim> {
+	// Internal State --------------------------------------------------------------------
 
 	@Autowired
 	private AgentClaimRepository repository;
+
+	// AbstractGuiService ----------------------------------------------------------------
 
 
 	@Override
@@ -61,20 +65,22 @@ public class AgentClaimUpdateService extends AbstractGuiService<Agent, Claim> {
 
 		object.setLeg(leg);
 		super.bindObject(object, "description", "passengerEmail", "status", "type", "leg");
-
 	}
 
 	@Override
-	public void validate(final Claim object) {
-		assert object != null;
-
+	public void validate(final Claim claim) {
+		if (!super.getBuffer().getErrors().hasErrors("draftMode"))
+			super.state(claim.isDraftMode(), "draftMode", "assistanceAgent.claim.form.error.draftMode");
 	}
 
 	@Override
 	public void perform(final Claim object) {
-		assert object != null;
+		Collection<TrackingLog> trackingLogs;
 
-		this.repository.save(object);
+		trackingLogs = this.repository.findAllTrackingLogsByClaimId(object.getId());
+
+		this.repository.deleteAll(trackingLogs);
+		this.repository.delete(object);
 	}
 
 	@Override
@@ -99,5 +105,4 @@ public class AgentClaimUpdateService extends AbstractGuiService<Agent, Claim> {
 
 		super.getResponse().addData(dataset);
 	}
-
 }

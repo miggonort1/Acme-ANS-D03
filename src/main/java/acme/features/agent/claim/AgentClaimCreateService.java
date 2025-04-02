@@ -1,6 +1,7 @@
 
 package acme.features.agent.claim;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claim.Claim;
+import acme.entities.claim.ClaimStatus;
 import acme.entities.claim.Type;
+import acme.entities.flight.Leg;
 import acme.realms.Agent;
 
 @GuiService
@@ -25,7 +28,9 @@ public class AgentClaimCreateService extends AbstractGuiService<Agent, Claim> {
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		status = super.getRequest().getPrincipal().hasRealmOfType(Agent.class);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -33,10 +38,12 @@ public class AgentClaimCreateService extends AbstractGuiService<Agent, Claim> {
 		Claim object;
 		Agent agent;
 		Date moment;
-		agent = this.repository.findOneAgentById(super.getRequest().getPrincipal().getActiveRealm().getId());
 
+		agent = this.repository.findOneAgentById(super.getRequest().getPrincipal().getActiveRealm().getId());
 		moment = MomentHelper.getCurrentMoment();
+
 		object = new Claim();
+		object.setLeg(null);
 		object.setDraftMode(true);
 		object.setRegistrationMoment(moment);
 		object.setAgent(agent);
@@ -47,7 +54,14 @@ public class AgentClaimCreateService extends AbstractGuiService<Agent, Claim> {
 	@Override
 	public void bind(final Claim object) {
 		assert object != null;
-		super.bindObject(object, "registrationMoment", "description", "passengerEmail", "indicatorLabel", "type");
+		int legId;
+		Leg leg;
+
+		legId = super.getRequest().getData("leg", int.class);
+		leg = this.repository.findLegById(legId);
+
+		object.setLeg(leg);
+		super.bindObject(object, "description", "passengerEmail", "status", "type", "leg");
 	}
 
 	@Override
@@ -67,10 +81,21 @@ public class AgentClaimCreateService extends AbstractGuiService<Agent, Claim> {
 	public void unbind(final Claim object) {
 		Dataset dataset;
 		SelectChoices choicesType;
+		SelectChoices choicesStatus;
+		SelectChoices choicesLegs;
+
+		Collection<Leg> legs;
+		legs = this.repository.findManyLegsLanded();
 
 		choicesType = SelectChoices.from(Type.class, object.getType());
-		dataset = super.unbindObject(object, "registrationMoment", "description", "passengerEmail", "indicatorLabel", "draftMode");
+		choicesStatus = SelectChoices.from(ClaimStatus.class, object.getStatus());
+		choicesLegs = SelectChoices.from(legs, "flightNumber", object.getLeg());
+
+		dataset = super.unbindObject(object, "registrationMoment", "description", "passengerEmail", "status", "type", "draftMode");
 		dataset.put("type", choicesType);
+		dataset.put("status", choicesStatus);
+		dataset.put("legs", choicesLegs);
+		dataset.put("leg", choicesLegs.getSelected().getKey());
 
 		super.getResponse().addData(dataset);
 	}

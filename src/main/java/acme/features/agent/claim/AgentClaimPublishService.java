@@ -2,11 +2,14 @@
 package acme.features.agent.claim;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
+import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claim.Claim;
@@ -16,7 +19,8 @@ import acme.entities.flight.Leg;
 import acme.realms.Agent;
 
 @GuiService
-public class AgentClaimUpdateService extends AbstractGuiService<Agent, Claim> {
+public class AgentClaimPublishService extends AbstractGuiService<Agent, Claim> {
+	// Internal state ---------------------------------------------------------
 
 	@Autowired
 	private AgentClaimRepository repository;
@@ -42,11 +46,18 @@ public class AgentClaimUpdateService extends AbstractGuiService<Agent, Claim> {
 	@Override
 	public void load() {
 		Claim object;
-		int id;
+		Agent agent;
+		Date moment;
 
-		id = super.getRequest().getData("id", int.class);
+		agent = this.repository.findOneAgentById(super.getRequest().getPrincipal().getActiveRealm().getId());
+		moment = MomentHelper.getCurrentMoment();
 
-		object = this.repository.findClaimById(id);
+		object = new Claim();
+		object.setLeg(null);
+		object.setDraftMode(true);
+		object.setRegistrationMoment(moment);
+		object.setAgent(agent);
+
 		super.getBuffer().addData(object);
 	}
 
@@ -61,7 +72,6 @@ public class AgentClaimUpdateService extends AbstractGuiService<Agent, Claim> {
 
 		object.setLeg(leg);
 		super.bindObject(object, "description", "passengerEmail", "status", "type", "leg");
-
 	}
 
 	@Override
@@ -74,6 +84,7 @@ public class AgentClaimUpdateService extends AbstractGuiService<Agent, Claim> {
 	public void perform(final Claim object) {
 		assert object != null;
 
+		object.setDraftMode(false);
 		this.repository.save(object);
 	}
 
@@ -100,4 +111,9 @@ public class AgentClaimUpdateService extends AbstractGuiService<Agent, Claim> {
 		super.getResponse().addData(dataset);
 	}
 
+	@Override
+	public void onSuccess() {
+		if (super.getRequest().getMethod().equals("POST"))
+			PrincipalHelper.handleUpdate();
+	}
 }

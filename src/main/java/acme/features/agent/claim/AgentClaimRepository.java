@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.claim.Claim;
+import acme.entities.claim.TrackingLog;
 import acme.entities.flight.Leg;
 import acme.realms.Agent;
 
@@ -23,6 +24,12 @@ public interface AgentClaimRepository extends AbstractRepository {
 	@Query("select a from Agent a where a.id = :id")
 	Agent findOneAgentById(int id);
 
-	@Query("select l from Leg l where l.draftMode = false")
-	Collection<Leg> findManyLegsPublished();
+	@Query("select l from Leg l where l.status = 3")
+	Collection<Leg> findManyLegsLanded();
+
+	@Query("select l from Leg l where l.id = :legId")
+	Leg findLegById(int legId);
+
+	@Query("select t from TrackingLog t where t.claim.id = :claimId")
+	Collection<TrackingLog> findAllTrackingLogsByClaimId(int claimId);
 }
