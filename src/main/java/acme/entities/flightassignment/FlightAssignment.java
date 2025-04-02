@@ -1,26 +1,29 @@
 
-package acme.entities.aircraft;
+package acme.entities.flightassignment;
 
-import javax.persistence.Column;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
-import acme.client.components.validation.ValidNumber;
+import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
-import acme.constraints.ValidShortText;
-import acme.entities.airline.Airline;
+import acme.entities.flight.Leg;
+import acme.realms.crewMember.CrewMember;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Aircraft extends AbstractEntity {
+public class FlightAssignment extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
 
@@ -29,40 +32,40 @@ public class Aircraft extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Mandatory
-	@ValidShortText
+	@Valid
 	@Automapped
-	private String				model;
+	private Duty				duty;
 
 	@Mandatory
-	@ValidShortText
-	@Column(unique = true)
-	private String				registrationNumber;
-
-	@Mandatory
-	@ValidNumber(min = 0, max = 255, message = "255 pasajeros como máximo")
-	@Automapped
-	private int					capacity;
-
-	@Mandatory
-	@ValidNumber(min = 2000.0, max = 50000.0, message = "El peso debe estar entre los 2K Kg y los 50K Kg")
-	@Automapped
-	private Double				cargoWeight;
+	@ValidMoment(past = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				moment;
 
 	@Mandatory
 	@Valid
 	@Automapped
-	private AircraftStatus		status;
+	private CurrentStatus		currentStatus;
 
 	@Optional
 	@ValidString(max = 255)
 	@Automapped
-	private String				details;
+	private String				remarks;
+
+	@Mandatory
+	//@Valid
+	@Automapped
+	private Boolean				draftMode			= true;
 
 	// Relationships ----------------------------------------------------------
 
 	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
-	private Airline				airline; //muchos aviones pertenecen a una compañia
+	private CrewMember			crewMember;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Leg					leg;
 
 }

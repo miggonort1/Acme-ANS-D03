@@ -41,6 +41,12 @@ master.menu.technician.my-maintenance-record= My Maintenance Record
 master.menu.technician.all-maintenance-record= All Maintenance Records
 master.menu.technician.my-tasks= My Tasks
 
+# master.menu.crew-member ####################################################
+master.menu.crew-member = Crew Member
+master.menu.crew-member.flight-assignments-completed= Flight Assignments Completed
+master.menu.crew-member.flight-assignments-planned= Flight Assignments Planned
+master.menu.crew-member.my-activity-logs= My Activity Logs
+
 # master.menu.agent ####################################################
 
 master.menu.agent = Agent
@@ -57,3 +63,5 @@ master.menu.user-account.become-consumer = Become a consumer
 master.menu.user-account.consumer-profile = Consumer profile
 master.menu.user-account.become-technician= Become a technician
 master.menu.user-account.technician-profile = Technician profile
+master.menu.user-account.become-crew-member= Become a crew member
+master.menu.user-account.crew-member-profile = Crew Member profile
