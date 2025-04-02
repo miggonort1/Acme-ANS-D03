@@ -6,11 +6,9 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
-import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.maintenancerecord.MaintenanceRecord;
-import acme.entities.maintenancerecord.Status;
 import acme.realms.Technician;
 
 @GuiService
@@ -41,12 +39,8 @@ public class TechnicianMaintenanceRecordListMineService extends AbstractGuiServi
 		assert object != null;
 
 		Dataset dataset;
-		SelectChoices choicesStatus;
+		dataset = super.unbindObject(object, "notes", "inspectionDueDate");
 
-		choicesStatus = SelectChoices.from(Status.class, object.getStatus());
-		dataset = super.unbindObject(object, "status", "inspectionDueDate");
-
-		dataset.put("status", choicesStatus);
 		super.getResponse().addData(dataset);
 	}
 

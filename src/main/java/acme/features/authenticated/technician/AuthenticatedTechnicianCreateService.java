@@ -70,6 +70,13 @@ public class AuthenticatedTechnicianCreateService extends AbstractGuiService<Aut
 	@Override
 	public void validate(final Technician object) {
 		assert object != null;
+
+		if (!super.getBuffer().getErrors().hasErrors("licenseNumber")) {
+			Technician existing;
+
+			existing = this.repository.findOneTechnicianByLicenseNumber(object.getLicenseNumber());
+			super.state(existing == null, "licenseNumber", "technician.form.error.duplicated");
+		}
 	}
 
 	@Override

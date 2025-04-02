@@ -47,7 +47,13 @@ master.menu.crew-member.flight-assignments-completed= Flight Assignments Complet
 master.menu.crew-member.flight-assignments-planned= Flight Assignments Planned
 master.menu.crew-member.my-activity-logs= My Activity Logs
 
+# master.menu.agent ####################################################
+
+master.menu.agent = Agent
+master.menu.agent.my-claim = My Claims
+
 # master.menu.user-account ####################################################
+
 
 master.menu.user-account = Account
 master.menu.user-account.general-profile = General profile

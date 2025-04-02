@@ -46,6 +46,11 @@ master.menu.crewMember = Tripulante
 master.menu.crewMember.my-flight-assignments= Mis asignaciones de vuelo
 master.menu.crewMember.my-tasks= Mis tareas
 
+# master.menu.agent ####################################################
+
+master.menu.agent = Agente
+master.menu.agent.my-claim = Mis Incidencias
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Cuenta
