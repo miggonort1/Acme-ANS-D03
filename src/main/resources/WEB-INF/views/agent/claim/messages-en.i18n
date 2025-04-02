@@ -9,6 +9,7 @@
 # they accept any liabilities with respect to them.
 
 agent.claim.list.title= Claims
+agent.trackingLog.list.title=Tracking Log
 agent.claim.list.button.create=Create
 agent.claim.list.label.passengerEmail=Passenger Email
 agent.claim.list.label.description=Description

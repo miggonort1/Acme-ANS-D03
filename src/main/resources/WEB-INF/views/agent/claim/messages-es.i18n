@@ -9,6 +9,7 @@
 # they accept any liabilities with respect to them.
 
 agent.claim.list.label.passengerEmail=Correo del pasajero
+agent.trackingLog.list.title=Registro de seguimiento
 agent.claim.list.title= Incidencias
 agent.claim.list.button.create=Crear
 agent.claim.list.label.description=Descripción
