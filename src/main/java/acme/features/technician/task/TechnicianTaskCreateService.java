@@ -10,7 +10,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.maintenancerecord.Task;
 import acme.entities.maintenancerecord.Type;
-import acme.realms.Technician;
+import acme.realms.technician.Technician;
 
 @GuiService
 public class TechnicianTaskCreateService extends AbstractGuiService<Technician, Task> {

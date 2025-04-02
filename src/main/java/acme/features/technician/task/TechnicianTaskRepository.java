@@ -12,7 +12,7 @@ import acme.entities.aircraft.Aircraft;
 import acme.entities.maintenancerecord.MaintenanceRecord;
 import acme.entities.maintenancerecord.MaintenanceRecordTask;
 import acme.entities.maintenancerecord.Task;
-import acme.realms.Technician;
+import acme.realms.technician.Technician;
 
 @Repository
 public interface TechnicianTaskRepository extends AbstractRepository {

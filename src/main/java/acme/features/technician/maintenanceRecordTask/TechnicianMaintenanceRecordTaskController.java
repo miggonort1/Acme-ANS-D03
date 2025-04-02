@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.controllers.AbstractGuiController;
 import acme.client.controllers.GuiController;
 import acme.entities.maintenancerecord.MaintenanceRecordTask;
-import acme.realms.Technician;
+import acme.realms.technician.Technician;
 
 @GuiController
 public class TechnicianMaintenanceRecordTaskController extends AbstractGuiController<Technician, MaintenanceRecordTask> {
