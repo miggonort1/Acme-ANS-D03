@@ -41,6 +41,11 @@ master.menu.technician.my-maintenance-record= My Maintenance Record
 master.menu.technician.all-maintenance-record= All Maintenance Records
 master.menu.technician.my-tasks= My Tasks
 
+# master.menu.manager ####################################################
+
+master.menu.manager = Manager
+master.menu.manager.my-flights = My flights
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Account

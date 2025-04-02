@@ -12,7 +12,7 @@ import acme.entities.flight.Flight;
 import acme.realms.manager.Manager;
 
 @GuiService
-public class ManagerFlightListService extends AbstractGuiService<Manager, Flight> {
+public class ManagerFlightListMineService extends AbstractGuiService<Manager, Flight> {
 
 	@Autowired
 	private ManagerFlightRepository repository;
@@ -34,7 +34,7 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 	@Override
 	public void unbind(final Flight flight) {
 		Dataset dataset;
-		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "manager");
+		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost");
 
 		super.getResponse().addData(dataset);
 	}

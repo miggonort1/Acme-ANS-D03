@@ -41,6 +41,12 @@ master.menu.technician.my-maintenance-record= Mis informes de mantenimiento
 master.menu.technician.all-maintenance-record= Todos los informes de mantenimiento
 master.menu.technician.my-tasks= Mis tareas
 
+# master.menu.manager ####################################################
+
+master.menu.manager = Manager
+master.menu.manager.my-flights = Mis vuelos
+
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Cuenta
