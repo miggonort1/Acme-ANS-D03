@@ -24,17 +24,17 @@ public class CrewMemberFlightAssignmentController extends AbstractGuiController<
 	@Autowired
 	private CrewMemberFlightAssignmentPlannedListService	listPlannedService;
 
-	//	@Autowired
-	//	private CrewMemberFlightAssignmentCreateService		createService;
-	//
-	//	@Autowired
-	//	private CrewMemberFlightAssignmentDeleteService		deleteService;
-	//
-	//	@Autowired
-	//	private CrewMemberFlightAssignmentUpdateService		updateService;
-	//
-	//	@Autowired
-	//	private CrewMemberFlightAssignmentPublishService	publishService;
+	@Autowired
+	private CrewMemberFlightAssignmentCreateService			createService;
+
+	@Autowired
+	private CrewMemberFlightAssignmentDeleteService			deleteService;
+
+	@Autowired
+	private CrewMemberFlightAssignmentUpdateService			updateService;
+
+	@Autowired
+	private CrewMemberFlightAssignmentPublishService		publishService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -42,14 +42,13 @@ public class CrewMemberFlightAssignmentController extends AbstractGuiController<
 	@PostConstruct
 	protected void initialise() {
 		super.addBasicCommand("show", this.showService);
-		//		super.addBasicCommand("create", this.createService);
-		//		super.addBasicCommand("update", this.updateService);
-		//		super.addBasicCommand("delete", this.deleteService);
-		//		super.addBasicCommand("publish", this.publishService);
+		super.addBasicCommand("create", this.createService);
+		super.addBasicCommand("update", this.updateService);
+		super.addBasicCommand("delete", this.deleteService);
 
-		super.addBasicCommand("list", this.listCompletedService);
+		super.addCustomCommand("list-completed", "list", this.listCompletedService);
 		super.addCustomCommand("list-planned", "list", this.listPlannedService);
-		// super.addCustomCommand("publish", "update", this.publishService);
+		super.addCustomCommand("publish", "update", this.publishService);
 	}
 
 }

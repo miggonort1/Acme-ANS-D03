@@ -22,7 +22,8 @@ public class CrewMemberFlightAssignmentPlannedListService extends AbstractGuiSer
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status = super.getRequest().getPrincipal().hasRealmOfType(CrewMember.class);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class CrewMemberFlightAssignmentPlannedListService extends AbstractGuiSer
 		int crewMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		Date currentMoment = MomentHelper.getCurrentMoment();
 
-		Collection<FlightAssignment> planned = this.repository.findPendingFlightAssignments(113, currentMoment);
+		Collection<FlightAssignment> planned = this.repository.findPendingFlightAssignments(crewMemberId, currentMoment);
 
 		super.getBuffer().addData(planned);
 	}
@@ -40,17 +41,18 @@ public class CrewMemberFlightAssignmentPlannedListService extends AbstractGuiSer
 		assert object != null;
 
 		Date currentMoment = MomentHelper.getCurrentMoment();
-		String legStatus = object.getLeg().getScheduledDeparture().after(currentMoment) ? "PLANNED FLIGHT LEG" : "COMPLETED FLIGHT LEG";
+		// String legStatus = object.getLeg().getScheduledDeparture().after(currentMoment) ? "PLANNED FLIGHT LEG" : "COMPLETED FLIGHT LEG";
 
 		Dataset dataset;
 
-		dataset = super.unbindObject(object, "duty", "moment", "currentStatus", "remarks", "crewMember", "leg");
+		dataset = super.unbindObject(object, "duty", "moment", "currentStatus", "remarks", "crewMember", "draftMode", "leg");
 		dataset.put("legFlightNumber", object.getLeg().getFlightNumber());
 		dataset.put("legScheduledDeparture", object.getLeg().getScheduledDeparture());
 		dataset.put("legScheduledArrival", object.getLeg().getScheduledArrival());
 		dataset.put("crewMemberEmployeeCode", object.getCrewMember().getEmployeeCode());
-		dataset.put("legStatus", legStatus);
+		// dataset.put("legStatus", legStatus);
 
+		super.addPayload(dataset, object, "duty", "moment", "currentStatus", "remarks", "crewMember", "draftMode", "leg");
 		super.getResponse().addData(dataset);
 	}
 

@@ -56,6 +56,7 @@ public class AuthenticatedCrewMemberCreateService extends AbstractGuiService<Aut
 		object = new CrewMember();
 		object.setUserAccount(userAccount);
 		object.setSalary(defaultSalary);
+		object.setEmployeeCode(CodeGenerator.generateValidCode(object));
 
 		super.getBuffer().addData(object);
 	}

@@ -17,10 +17,12 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code="crew-member.flight-assignment.list.label.duty" path="duty" width="30%"/>
-	<acme:list-column code="crew-member.flight-assignment.list.label.moment" path="moment" width="30%"/>
-	<acme:list-column code="crew-member.flight-assignment.list.label.status" path="currentStatus" width="40%"/>
-	<acme:list-column code="crew-member.flight-assignment.list.label.legStatus" path="legStatus" width="40%"/>
+	<acme:list-column code="crew-member.flight-assignment.list.label.leg"  path="leg" width="10%"/>
+	<acme:list-column code="crew-member.flight-assignment.list.label.duty" path="duty" width="10%"/>
+	<acme:list-column code="crew-member.flight-assignment.list.label.moment" path="moment" width="10%"/>
+	<acme:list-column code="crew-member.flight-assignment.list.label.status"  path="currentStatus" width="10%"/>
+	<acme:list-column code="crew-member.flight-assignment.list.label.remarks"  path="remarks" width="10%"/>
+	<acme:list-column code="crew-member.flight-assignment.list.label.draftMode"  path="draftMode" width="10%"/>
 	<acme:list-payload path="payload"/>
 </acme:list>
 

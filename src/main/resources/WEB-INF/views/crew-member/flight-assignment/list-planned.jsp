@@ -26,6 +26,7 @@
 	<acme:list-column code="flightCrewMember.assignment.list.label.duty" path="duty" width="30%"/>
 	<acme:list-column code="flightCrewMember.assignment.list.label.lastUpdate" path="moment" width="30%"/>
 	<acme:list-column code="flightCrewMember.assignment.list.label.status" path="currentStatus" width="40%"/>
+	<acme:list-column code="crew-member.flight-assignment.list.label.legStatus" path="legStatus" width="40%"/>
 	<acme:list-payload path="payload"/>
 </acme:list>
 

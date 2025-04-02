@@ -33,7 +33,7 @@ public class ActivityLog extends AbstractEntity {
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				registrationMoment; //falta verificar que se haga despues del tramo pero eso es una custom validation
+	private Date				registrationMoment;
 
 	@Mandatory
 	@ValidShortText

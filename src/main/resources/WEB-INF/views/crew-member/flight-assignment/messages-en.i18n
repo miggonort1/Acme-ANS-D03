@@ -11,28 +11,22 @@
 crew-member.flight-assignment.list.title=Flight Assignment List
 crew-member.flight-assignment.form.title = Flight Assignment Details
 
-# Labels (form)
+# Form Labels
 crew-member.flight-assignment.form.label.duty = Duty:
 crew-member.flight-assignment.form.label.moment = Last update moment:
-crew-member.flight-assignment.form.label.status = Status:
+crew-member.flight-assignment.form.label.status = Current Status:
 crew-member.flight-assignment.form.label.remarks = Remarks (Optional):
-crew-member.flight-assignment.form.label.leg = Leg:
-crew-member.flight-assignment.form.label.crew-member= Flight crew member:
+crew-member.flight-assignment.form.label.leg = Leg code:
+crew-member.flight-assignment.form.label.crewMember= Flight crew member:
 
 # List Labels
-crew-member.flight-assignment.list.button.create=Create Assignment
-crew-member.flight-assignment.list.label.leg=Flight Leg
-crew-member.flight-assignment.list.label.legFlightNumber= Leg Flight Number
-crew-member.flight-assignment.list.label.legScheduledDeparture= Leg Scheduled Departure
-crew-member.flight-assignment.list.label.status=Status
-crew-member.flight-assignment.list.label.duty=Duty
+crew-member.flight-assignment.list.label.leg=Flight Number:
+crew-member.flight-assignment.list.label.duty=Duty:
 crew-member.flight-assignment.list.label.moment=Assignment Date
-crew-member.flight-assignment.form.title=Flight Assignment Details
-crew-member.flight-assignment.form.label.leg=Flight Leg
-crew-member.flight-assignment.form.label.status=Status
-crew-member.flight-assignment.list.label.legStatus=Leg Status
-crew-member.flight-assignment.form.label.duty=Duty
-crew-member.flight-assignment.list.label.remarks=Remarks
+crew-member.flight-assignment.list.label.status=Status:
+crew-member.flight-assignment.list.label.remarks=Remarks:
+crew-member.flight-assignment.list.label.draftMode = Draft mode:
+
 
 # Form Buttons
 crew-member.flight-assignment.form.button.update= Update Assignment
@@ -40,3 +34,4 @@ crew-member.flight-assignment.form.button.create= Create Assignment
 crew-member.flight-assignment.form.button.delete= Delete Assignment
 crew-member.flight-assignment.form.button.publish= Publish Assignment
 crew-members.flight-assignment.list.button.create = Create
+crew-member.flight-assignment.form.button.activity-log = Show activity logs

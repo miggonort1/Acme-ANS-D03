@@ -8,19 +8,29 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-crewmember.flight-assignment.list.title=Listado de asignaciones de vuelo
-crewmember.flight-assignment.list.button.create=Crear asignación
-crewmember.flight-assignment.list.label.leg=Tramo de vuelo
-crewmember.flight-assignment.list.label.status=Estado
-crewmember.flight-assignment.list.label.duty=Función
-crewmember.flight-assignment.list.label.moment=Fecha de asignación
-crewmember.flight-assignment.form.title=Detalle de asignación de vuelo
-crewmember.flight-assignment.form.label.leg=Tramo de vuelo
-crewmember.flight-assignment.form.label.status=Estado
-crewmember.flight-assignment.form.label.duty=Función
-crewmember.flight-assignment.form.label.remarks=Notas
+crew-member.flight-assignment.list.title=Listado de asignaciones de vuelo
+crew-member.flight-assignment.form.title=Detalles de la asignación de vuelo
 
-crewMember.flight-assignment.form.button.update= Actualizar
-crewMember.flight-assignment.form.button.create= Crear
-crewMember.flight-assignment.form.button.delete= Borrar
-crewMember.flight-assignment.form.button.publish= Publicar
+# Form Labels
+crew-member.flight-assignment.form.label.duty=Función:
+crew-member.flight-assignment.form.label.moment=Momento de última actualización:
+crew-member.flight-assignment.form.label.status=Estado actual:
+crew-member.flight-assignment.form.label.remarks=Notas (opcional):
+crew-member.flight-assignment.form.label.leg=Código de tramo:
+crew-member.flight-assignment.form.label.crewMember=Tripulante:
+
+# List Labels
+crew-member.flight-assignment.list.label.leg=Número de vuelo:
+crew-member.flight-assignment.list.label.duty=Función:
+crew-member.flight-assignment.list.label.moment=Fecha de asignación:
+crew-member.flight-assignment.list.label.status=Estado:
+crew-member.flight-assignment.list.label.remarks=Notas:
+crew-member.flight-assignment.list.label.draftMode=Modo borrador:
+
+# Form Buttons
+crew-member.flight-assignment.form.button.update=Actualizar asignación
+crew-member.flight-assignment.form.button.create=Crear asignación
+crew-member.flight-assignment.form.button.delete=Eliminar asignación
+crew-member.flight-assignment.form.button.publish=Publicar asignación
+crew-members.flight-assignment.list.button.create=Crear
+crew-member.flight-assignment.form.button.activity-log=Mostrar registros de actividad

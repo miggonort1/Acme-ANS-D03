@@ -17,25 +17,23 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-<acme:input-moment code="crew-member.flight-assignment.form.label.moment" path="moment" readonly="true"/>
-	<acme:input-select code="crew-member.flight-assignment.form.label.crew-member" path="crewMember" choices= "${crewMembers}"/>
-	<acme:input-select code="crew-member.flight-assignment.form.label.duty" path="duty" choices= "${duties}"/>	
-	<acme:input-select code="crew-member.flight-assignment.form.label.leg" path="leg" choices= "${legs}"/>
-	<acme:input-select code="crew-member.flight-assignment.form.label.status" path="currentStatus" choices= "${currentStatus}"/>
-	<acme:input-textarea code="crew-member.flight-assignment.form.label.remarks" path="remarks"/>
+	<acme:input-moment code="crew-member.flight-assignment.form.label.moment" path="moment" readonly="true" />
+	<acme:input-textbox code="crew-member.flight-assignment.form.label.crewMember" path="crewMember" readonly="true"/>
+	<acme:input-select code="crew-member.flight-assignment.form.label.duty" path="duty" choices="${duties}" readonly="draftMode"/>
+	<acme:input-select code="crew-member.flight-assignment.form.label.leg" path="leg" choices= "${legs}" readonly="draftMode"/>
+	<acme:input-select code="crew-member.flight-assignment.form.label.status" path="currentStatus" choices= "${statusChoices}" readonly="draftMode"/>
+	<acme:input-textarea code="crew-member.flight-assignment.form.label.remarks" path="remarks" readonly="draftMode"/>
 	
 	
 	<jstl:choose>
 		<jstl:when test="${_command == 'show' && draftMode == false}">
-			<acme:button code="crew-member.flight-assignment.form.button.leg" action="/crew-member/flight-assignment/show?masterId=${id}"/>	
-			<acme:button code="crew-member.flight-assignment.form.button.crewMember" action="/crew-member/flight-assignment/show?masterId=${id}"/>					
+			<acme:button code="crew-member.flight-assignment.form.button.activity-log" action="/crew-member/activity-log/list?assignmentId=${id}"/>					
 		</jstl:when> 
-		<jstl:when test="${acme:anyOf(_command, 'show|update|publish') && draftMode == true}">
-			<acme:button code="crew-member.flight-assignment.form.button.leg" action="/crew-member/flight-assignment/show?masterId=${id}"/>	
-			<acme:button code="crew-member.flight-assignment.form.button.crew-member" action="/crew-member/flight-assignment/show?masterId=${id}"/>	
+		<jstl:when test="${acme:anyOf(_command, 'show|update|publish')  && draftMode == true}">
 			<acme:submit code="crew-member.flight-assignment.form.button.update" action="/crew-member/flight-assignment/update"/>
 			<acme:submit code="crew-member.flight-assignment.form.button.delete" action="/crew-member/flight-assignment/delete"/>
 			<acme:submit code="crew-member.flight-assignment.form.button.publish" action="/crew-member/flight-assignment/publish"/>
+			<acme:button code="crew-member.flight-assignment.form.button.activity-log" action="/crew-member/activity-log/list?assignmentId=${id}"/>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">
 			<acme:submit code="crew-member.flight-assignment.form.button.create" action="/crew-member/flight-assignment/create"/>
