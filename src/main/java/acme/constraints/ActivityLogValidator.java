@@ -6,7 +6,7 @@ import javax.validation.ConstraintValidatorContext;
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.client.helpers.MomentHelper;
-import acme.entities.flightasignment.ActivityLog;
+import acme.entities.flightassignment.ActivityLog;
 
 @Validator
 public class ActivityLogValidator extends AbstractValidator<ValidActivityLog, ActivityLog> {

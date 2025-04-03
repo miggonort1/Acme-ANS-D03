@@ -15,6 +15,7 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
 import acme.constraints.ValidLongText;
+import acme.entities.flight.Leg;
 import acme.realms.Agent;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,9 +50,9 @@ public class Claim extends AbstractEntity {
 	private Type				type;
 
 	@Mandatory
-	// HINT: @Valid by default.
+	@Valid
 	@Automapped
-	private boolean				indicator;
+	private ClaimStatus			status;
 
 	@Mandatory
 	// HINT: @Valid by default.
@@ -63,4 +64,10 @@ public class Claim extends AbstractEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	private Agent				agent;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Leg					leg;
+
 }
