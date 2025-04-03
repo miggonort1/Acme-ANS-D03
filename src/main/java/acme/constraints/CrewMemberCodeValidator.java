@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
-import acme.realms.crewMember.CrewMember;
-import acme.realms.crewMember.CrewMemberRepository;
+import acme.realms.CrewMember;
+import acme.realms.CrewMemberRepository;
 
 @Validator
 public class CrewMemberCodeValidator extends AbstractValidator<ValidCrewMemberCode, CrewMember> {

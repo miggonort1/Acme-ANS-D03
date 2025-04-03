@@ -13,8 +13,8 @@ import acme.entities.flight.Leg;
 import acme.entities.flightassignment.CurrentStatus;
 import acme.entities.flightassignment.Duty;
 import acme.entities.flightassignment.FlightAssignment;
-import acme.realms.crewMember.CrewMember;
-import acme.realms.crewMember.CrewMemberRepository;
+import acme.realms.CrewMember;
+import acme.realms.CrewMemberRepository;
 
 @GuiService
 public class CrewMemberFlightAssignmentCreateService extends AbstractGuiService<CrewMember, FlightAssignment> {

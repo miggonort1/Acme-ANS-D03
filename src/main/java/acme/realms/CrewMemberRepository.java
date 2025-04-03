@@ -1,5 +1,5 @@
 
-package acme.realms.crewMember;
+package acme.realms;
 
 import java.util.Collection;
 

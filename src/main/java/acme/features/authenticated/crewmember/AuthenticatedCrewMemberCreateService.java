@@ -16,7 +16,7 @@ import acme.client.services.GuiService;
 import acme.entities.airline.Airline;
 import acme.entities.airline.AirlineRepository;
 import acme.realms.AvailabilityStatus;
-import acme.realms.crewMember.CrewMember;
+import acme.realms.CrewMember;
 
 @GuiService
 public class AuthenticatedCrewMemberCreateService extends AbstractGuiService<Authenticated, CrewMember> {
