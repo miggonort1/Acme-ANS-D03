@@ -16,7 +16,7 @@ import acme.entities.aircraft.Aircraft;
 import acme.entities.maintenancerecord.MaintenanceRecord;
 import acme.entities.maintenancerecord.Status;
 import acme.entities.maintenancerecord.Task;
-import acme.realms.Technician;
+import acme.realms.technician.Technician;
 
 @GuiService
 public class TechnicianMaintenanceRecordPublishService extends AbstractGuiService<Technician, MaintenanceRecord> {
@@ -53,13 +53,13 @@ public class TechnicianMaintenanceRecordPublishService extends AbstractGuiServic
 		assert object != null;
 		Aircraft aircraft;
 		int aircraftId;
-		super.bindObject(object, "status", "inspectionDueDate", "estimatedCost", "note", "aircraft");
+		super.bindObject(object, "status", "inspectionDueDate", "estimatedCost", "notes", "aircraft");
 
 		aircraftId = super.getRequest().getData("aircraft", int.class);
 		aircraft = this.repository.findOneAircraftById(aircraftId);
 		object.setAircraft(aircraft);
-		if (object.getNote() == "")
-			object.setNote(null);
+		if (object.getNotes() == "")
+			object.setNotes(null);
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class TechnicianMaintenanceRecordPublishService extends AbstractGuiServic
 		choicesAircraft = SelectChoices.from(aircrafts, "registrationNumber", object.getAircraft());
 
 		choicesStatus = SelectChoices.from(Status.class, object.getStatus());
-		dataset = super.unbindObject(object, "moment", "status", "inspectionDueDate", "estimatedCost", "note", "draftMode");
+		dataset = super.unbindObject(object, "moment", "status", "inspectionDueDate", "estimatedCost", "notes", "draftMode");
 		dataset.put("status", choicesStatus);
 		dataset.put("aircraft", choicesAircraft.getSelected().getKey());
 		dataset.put("aircrafts", choicesAircraft);

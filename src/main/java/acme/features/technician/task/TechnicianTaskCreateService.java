@@ -10,7 +10,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.maintenancerecord.Task;
 import acme.entities.maintenancerecord.Type;
-import acme.realms.Technician;
+import acme.realms.technician.Technician;
 
 @GuiService
 public class TechnicianTaskCreateService extends AbstractGuiService<Technician, Task> {
@@ -49,6 +49,10 @@ public class TechnicianTaskCreateService extends AbstractGuiService<Technician, 
 	public void validate(final Task object) {
 		assert object != null;
 
+		if (!super.getBuffer().getErrors().hasErrors("priority"))
+			super.state(object.getPriority() >= 0 && object.getPriority() < 11, "priority", "technician.task.form.error.priority-range");
+		if (!super.getBuffer().getErrors().hasErrors("estimatedDuration"))
+			super.state(object.getEstimatedDuration() >= 0 && object.getEstimatedDuration() < 1001, "estimatedDuration", "technician.task.form.error.estimatedDuration-range");
 	}
 
 	@Override

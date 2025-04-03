@@ -9,7 +9,7 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.maintenancerecord.MaintenanceRecord;
-import acme.realms.Technician;
+import acme.realms.technician.Technician;
 
 @GuiService
 public class TechnicianMaintenanceRecordListAllService extends AbstractGuiService<Technician, MaintenanceRecord> {
@@ -38,7 +38,7 @@ public class TechnicianMaintenanceRecordListAllService extends AbstractGuiServic
 
 		Dataset dataset;
 
-		dataset = super.unbindObject(object, "inspectionDueDate", "status");
+		dataset = super.unbindObject(object, "inspectionDueDate", "notes");
 
 		super.getResponse().addData(dataset);
 	}

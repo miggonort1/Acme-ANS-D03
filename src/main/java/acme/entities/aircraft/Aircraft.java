@@ -11,7 +11,7 @@ import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidNumber;
-import acme.constraints.ValidLongText;
+import acme.client.components.validation.ValidString;
 import acme.constraints.ValidShortText;
 import acme.entities.airline.Airline;
 import lombok.Getter;
@@ -39,12 +39,12 @@ public class Aircraft extends AbstractEntity {
 	private String				registrationNumber;
 
 	@Mandatory
-	@ValidNumber(min = 0, max = 255)
+	@ValidNumber(min = 0, max = 255, message = "255 pasajeros como máximo")
 	@Automapped
 	private int					capacity;
 
 	@Mandatory
-	@ValidNumber(min = 2000.0, max = 50000.0)
+	@ValidNumber(min = 2000.0, max = 50000.0, message = "El peso debe estar entre los 2K Kg y los 50K Kg")
 	@Automapped
 	private Double				cargoWeight;
 
@@ -54,7 +54,7 @@ public class Aircraft extends AbstractEntity {
 	private AircraftStatus		status;
 
 	@Optional
-	@ValidLongText
+	@ValidString(max = 255)
 	@Automapped
 	private String				details;
 

@@ -11,11 +11,12 @@
 technician.maintenance-record.list.title= Maintenance Record
 technician.maintenance-record.list.button.create= Create
 technician.maintenance-record.list.label.inspectionDueDate= Inspection due date
+technician.maintenance-record.list.label.notes= Notes
 technician.maintenance-record.form.label.aircraft= Aircraft
 technician.maintenance-record.form.label.status= Status
 technician.maintenance-record.form.label.inspectionDueDate= Inspection due date
 technician.maintenance-record.form.label.estimatedCost= Estimated Cost
-technician.maintenance-record.form.label.note= Note
+technician.maintenance-record.form.label.notes= Notes
 
 technician.maintenance-record.form.label.execution= Execution Moment
 
@@ -28,4 +29,8 @@ technician.maintenance-record.form.button.publish= Publish
 
 technician.maintenance-record.form.button.task= Tasks details
 technician.maintenance-record.form.button.maintenance-record-task= Add or remove a task
+
+technician.maintenance-record.form.error.task= All tasks must be published
+technician.maintenance-record.form.error.existsTasks= There are no tasks associated
+technician.maintenance-record.form.error.bad-date= Date must be future
 

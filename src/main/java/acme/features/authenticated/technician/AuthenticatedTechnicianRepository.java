@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import acme.client.components.principals.UserAccount;
 import acme.client.repositories.AbstractRepository;
-import acme.realms.Technician;
+import acme.realms.technician.Technician;
 
 @Repository
 public interface AuthenticatedTechnicianRepository extends AbstractRepository {
@@ -28,4 +28,6 @@ public interface AuthenticatedTechnicianRepository extends AbstractRepository {
 	@Query("select t from Technician t where t.userAccount.id = :id")
 	Technician findTechnicianByUserAccountId(int id);
 
+	@Query("select t from Technician t where t.licenseNumber = :licenseNumber")
+	Technician findOneTechnicianByLicenseNumber(String licenseNumber);
 }

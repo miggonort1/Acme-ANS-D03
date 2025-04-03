@@ -10,7 +10,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.maintenancerecord.MaintenanceRecord;
 import acme.entities.maintenancerecord.MaintenanceRecordTask;
-import acme.realms.Technician;
+import acme.realms.technician.Technician;
 
 @GuiService
 public class TechnicianMaintenanceRecordTaskListService extends AbstractGuiService<Technician, MaintenanceRecordTask> {
@@ -50,8 +50,8 @@ public class TechnicianMaintenanceRecordTaskListService extends AbstractGuiServi
 		Dataset dataset;
 
 		dataset = super.unbindObject(object, "version");
-		dataset.put("maintenanceRecord", object.getMaintenanceRecord().getId());
-		dataset.put("task", object.getTask().getId());
+		dataset.put("maintenanceRecord", object.getMaintenanceRecord().getInspectionDueDate());
+		dataset.put("task", object.getTask().getDescription());
 
 		super.getResponse().addData(dataset);
 	}

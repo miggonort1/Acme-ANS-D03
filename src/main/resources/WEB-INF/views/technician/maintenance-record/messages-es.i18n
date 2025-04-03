@@ -11,11 +11,12 @@
 technician.maintenance-record.list.title= Informe de mantenimiento
 technician.maintenance-record.list.button.create= Crear
 technician.maintenance-record.list.label.inspectionDueDate= Fecha de inspección límite
+technician.maintenance-record.list.label.notes=Notas
 technician.maintenance-record.form.label.aircraft= Aeronave
 technician.maintenance-record.form.label.status= Estado
 technician.maintenance-record.form.label.inspectionDueDate= Fecha de inspección límite
 technician.maintenance-record.form.label.estimatedCost= Coste estimado
-technician.maintenance-record.form.label.note= Notas
+technician.maintenance-record.form.label.notes= Notas
 
 technician.maintenance-record.form.label.execution= Momento de ejecución
 
@@ -28,3 +29,8 @@ technician.maintenance-record.form.button.publish= Publicar
 
 technician.maintenance-record.form.button.task= Detalle de las tareas
 technician.maintenance-record.form.button.maintenance-record-task= Añade o elimina tareas
+
+
+technician.maintenance-record.form.error.task= Todas las tareas deben estar publicadas
+technician.maintenance-record.form.error.existsTasks= No hay tareas asociadas
+technician.maintenance-record.form.error.bad-date= La fecha debe ser futura

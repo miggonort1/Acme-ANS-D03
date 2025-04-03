@@ -20,7 +20,7 @@ import acme.client.components.principals.UserAccount;
 import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.realms.Technician;
+import acme.realms.technician.Technician;
 
 @GuiService
 public class AuthenticatedTechnicianCreateService extends AbstractGuiService<Authenticated, Technician> {
@@ -70,6 +70,13 @@ public class AuthenticatedTechnicianCreateService extends AbstractGuiService<Aut
 	@Override
 	public void validate(final Technician object) {
 		assert object != null;
+
+		if (!super.getBuffer().getErrors().hasErrors("licenseNumber")) {
+			Technician existing;
+
+			existing = this.repository.findOneTechnicianByLicenseNumber(object.getLicenseNumber());
+			super.state(existing == null, "licenseNumber", "technician.form.error.duplicated");
+		}
 	}
 
 	@Override
