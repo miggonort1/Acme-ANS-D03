@@ -44,7 +44,7 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 		legs = this.repository.findAllLegsByFlightId(flight.getId());
 		canBePublished = !legs.isEmpty() && this.repository.areAllLegsPublished(flight.getId());
 
-		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "manager");
+		dataset = super.unbindObject(flight, "tag", "selfTransfer", "cost", "description", "draftMode");
 		dataset.put("legs", legs);
 		dataset.put("canBePublished", canBePublished);
 
