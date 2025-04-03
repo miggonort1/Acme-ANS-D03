@@ -21,3 +21,6 @@ technician.task.form.button.update=Actualizar
 technician.task.form.button.create=Crear
 technician.task.form.button.delete=Borrar
 technician.task.form.button.publish=Publicar
+
+
+acme.validation.range= Fuera del rango

@@ -30,3 +30,7 @@ technician.maintenance-record.form.button.publish= Publish
 technician.maintenance-record.form.button.task= Tasks details
 technician.maintenance-record.form.button.maintenance-record-task= Add or remove a task
 
+technician.maintenance-record.form.error.task= All tasks must be published
+technician.maintenance-record.form.error.existsTasks= There are no tasks associated
+technician.maintenance-record.form.error.bad-date= Date must be future
+
