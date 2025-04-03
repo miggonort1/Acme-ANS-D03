@@ -16,7 +16,7 @@ import acme.entities.aircraft.Aircraft;
 import acme.entities.maintenancerecord.MaintenanceRecord;
 import acme.entities.maintenancerecord.Status;
 import acme.entities.maintenancerecord.Task;
-import acme.realms.Technician;
+import acme.realms.technician.Technician;
 
 @GuiService
 public class TechnicianMaintenanceRecordPublishService extends AbstractGuiService<Technician, MaintenanceRecord> {

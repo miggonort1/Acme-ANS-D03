@@ -13,7 +13,7 @@ import acme.client.services.GuiService;
 import acme.entities.maintenancerecord.MaintenanceRecord;
 import acme.entities.maintenancerecord.MaintenanceRecordTask;
 import acme.entities.maintenancerecord.Task;
-import acme.realms.Technician;
+import acme.realms.technician.Technician;
 
 @GuiService
 public class TechnicianMaintenanceRecordTaskCreateService extends AbstractGuiService<Technician, MaintenanceRecordTask> {
@@ -90,7 +90,13 @@ public class TechnicianMaintenanceRecordTaskCreateService extends AbstractGuiSer
 		Dataset dataset;
 		SelectChoices choicesTask;
 		Collection<Task> tasks;
+		int masterId;
+		Collection<Task> tasks_asociated;
 		tasks = this.repository.findManyTasksByTechnicianId(super.getRequest().getPrincipal().getActiveRealm().getId());
+
+		masterId = super.getRequest().getData("masterId", int.class);
+		tasks_asociated = this.repository.findTasksFromMaintenanceRecordId(masterId);
+		tasks.removeAll(tasks_asociated);
 		choicesTask = SelectChoices.from(tasks, "description", object.getTask());
 		dataset = super.unbindObject(object, "version");
 
