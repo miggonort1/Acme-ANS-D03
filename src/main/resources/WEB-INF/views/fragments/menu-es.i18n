@@ -47,6 +47,13 @@ master.menu.technician.my-maintenance-record= Mis informes de mantenimiento
 master.menu.technician.all-maintenance-record= Todos los informes de mantenimiento
 master.menu.technician.my-tasks= Mis tareas
 
+
+# master.menu.manager ####################################################
+
+master.menu.manager = Manager
+master.menu.manager.my-flights = Mis vuelos
+
+
 # master.menu.crewMember ####################################################
 master.menu.crewMember = Tripulante
 master.menu.crewMember.my-flight-assignments= Mis asignaciones de vuelo
@@ -56,6 +63,7 @@ master.menu.crewMember.my-tasks= Mis tareas
 
 master.menu.agent = Agente
 master.menu.agent.my-claim = Mis Incidencias
+
 
 # master.menu.user-account ####################################################
 
