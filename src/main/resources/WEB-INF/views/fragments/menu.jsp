@@ -50,8 +50,14 @@
 			<acme:menu-suboption code="master.menu.technician.my-tasks" action="/technician/task/list-mine"/>
 			<acme:menu-separator/>	
 		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.customer" access="hasRealm('Customer')">
+			<acme:menu-suboption code="master.menu.customer.bookings" action="/customer/booking/list"/>
+			<acme:menu-suboption code="master.menu.customer.passengers" action="/customer/passenger/list"/>
+		</acme:menu-option>
 		<acme:menu-option code="master.menu.user-account" access="isAuthenticated">
 			<acme:menu-suboption code="master.menu.technician.all-maintenance-record" action="/technician/maintenance-record/list-all"/>
+			
 			<acme:menu-separator/>
 		</acme:menu-option>
 	</acme:menu-left>
