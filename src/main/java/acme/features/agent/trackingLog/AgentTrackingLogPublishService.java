@@ -47,7 +47,7 @@ public class AgentTrackingLogPublishService extends AbstractGuiService<Agent, Tr
 
 	@Override
 	public void bind(final TrackingLog object) {
-		super.bindObject(object, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution");
+		super.bindObject(object, "step", "resolutionPercentage", "status", "resolution");
 	}
 
 	@Override

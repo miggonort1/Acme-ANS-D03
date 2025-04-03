@@ -4,8 +4,10 @@ package acme.features.agent.trackingLog;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.claim.TrackinLogStatus;
 import acme.entities.claim.TrackingLog;
 import acme.realms.Agent;
 
@@ -47,8 +49,15 @@ public class AgentTrackingLogShowService extends AbstractGuiService<Agent, Track
 	@Override
 	public void unbind(final TrackingLog object) {
 		Dataset dataset;
+		SelectChoices choicesStatus;
+
+		choicesStatus = SelectChoices.from(TrackinLogStatus.class, object.getStatus());
 
 		dataset = super.unbindObject(object, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution");
+
+		dataset.put("status", choicesStatus);
+		dataset.put("masterId", object.getClaim().getId());
+		dataset.put("draftMode", object.getClaim().isDraftMode());
 
 		super.getResponse().addData(dataset);
 	}

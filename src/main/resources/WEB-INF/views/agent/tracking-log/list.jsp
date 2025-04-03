@@ -17,10 +17,10 @@
 
 <acme:list>
 	<acme:list-column code="agent.trackingLog.list.label.step" path="step" width="25%"/>
-	<acme:list-column code="agent.trackingLog.list.label.resolutionPorcentage" path="resolutionPorcentage" width="25%"/>
+	<acme:list-column code="agent.trackingLog.list.label.resolutionPercentage" path="resolutionPercentage" width="25%"/>
 	<acme:list-column code="agent.trackingLog.list.label.status" path="status" width="25%"/>
 </acme:list>
 
 	<jstl:if test="${_command == 'list-mine'}">
-	<acme:button code="agent.trackingLog.list.button.create" action="/agent/trackingLog/create?masterId=${masterId}"/>
+	<acme:button code="agent.trackingLog.list.button.create" action="/agent/tracking-log/create?masterId=${masterId}"/>
 </jstl:if>

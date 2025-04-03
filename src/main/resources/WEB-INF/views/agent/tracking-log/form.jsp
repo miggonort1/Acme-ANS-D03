@@ -23,12 +23,12 @@
 	<acme:input-textarea code="agent.trackingLog.form.label.resolution" path="resolution"/>
 	<jstl:choose>
 	<jstl:when test="${_command == 'create'}">
-		<acme:submit  code="agent.claim.form.button.create" action="/agent/claim/create?masterId=${masterId}"/>
+		<acme:submit  code="agent.trackingLog.form.button.create" action="/agent/tracking-log/create?masterId=${masterId}"/>
 	</jstl:when>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode==true }">
-		<acme:submit  code="agent.trackingLog.form.button.update" action="/agent/trackingLog/update?masterId=${masterId}"/>
-		<acme:submit  code="agent.trackingLog.form.button.publish" action="/agent/trackingLog/publish"/>
-		<acme:submit  code="agent.trackingLog.form.button.delete" action="/agent/trackingLog/delete"/>
+		<acme:submit  code="agent.trackingLog.form.button.update" action="/agent/tracking-log/update?masterId=${masterId}"/>
+		<acme:submit  code="agent.trackingLog.form.button.publish" action="/agent/tracking-log/publish"/>
+		<acme:submit  code="agent.trackingLog.form.button.delete" action="/agent/tracking-log/delete"/>
 	</jstl:when>	
 	</jstl:choose>
 </acme:form>

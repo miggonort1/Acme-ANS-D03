@@ -25,19 +25,16 @@
 	
 	<jstl:choose>
 		<jstl:when test="${_command == 'show' && draftMode == false}">
-	 <acme:button code="agent.trackingLog.list.title" action="/agent/trackingLog/list-mine?masterId=${id}"/>
-	 </jstl:when>
-	</jstl:choose>
-	
-	<jstl:choose>
-	<jstl:when test="${_command == 'create'}">
-		<acme:submit  code="agent.claim.form.button.create" action="/agent/claim/create?masterId=${masterId}"/>
-	</jstl:when>
-		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode==true }">
-		<acme:submit  code="agent.claim.form.button.update" action="/agent/claim/update?masterId=${masterId}"/>
-		<acme:submit  code="agent.claim.form.button.publish" action="/agent/claim/publish"/>
-		<acme:submit  code="agent.claim.form.button.delete" action="/agent/claim/delete"/>
-		<acme:button code="agent.trackingLog.list.title" action="/agent/trackingLog/list-mine?masterId=${id}"/>
-	</jstl:when>	
+				<acme:button code="agent.trackingLog.list.tittle" action="/agent/tracking-log/list-mine?masterId=${id}"/>			
+		</jstl:when>
+		<jstl:when test="${_command == 'create'}">
+			<acme:submit  code="agent.claim.form.button.create" action="/agent/claim/create?masterId=${masterId}"/>
+		</jstl:when>
+			<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode==true }">
+			<acme:submit  code="agent.claim.form.button.update" action="/agent/claim/update?masterId=${masterId}"/>
+			<acme:submit  code="agent.claim.form.button.publish" action="/agent/claim/publish"/>
+			<acme:submit  code="agent.claim.form.button.delete" action="/agent/claim/delete"/>
+			<acme:button code="agent.trackingLog.list.title" action="/agent/tracking-log/list-mine?masterId=${id}"/>
+		</jstl:when>	
 	</jstl:choose>
 </acme:form>

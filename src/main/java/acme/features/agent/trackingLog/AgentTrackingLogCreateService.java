@@ -1,10 +1,13 @@
 
 package acme.features.agent.trackingLog;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claim.Claim;
@@ -26,8 +29,11 @@ public class AgentTrackingLogCreateService extends AbstractGuiService<Agent, Tra
 
 	@Override
 	public void load() {
-		int claimId = super.getRequest().getData("claimId", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
+		int masterId;
+		masterId = super.getRequest().getData("masterId", int.class);
+		Claim claim = this.repository.findClaimById(masterId);
+		Date currentMoment;
+		currentMoment = MomentHelper.getCurrentMoment();
 
 		//		boolean isCustomerDissatisfied = this.repository.isCustomerDissatisfied(claimId);
 		//		boolean hasFullResolutionLog = this.repository.existsTrackingLogWithFullResolution(claimId);
@@ -39,6 +45,7 @@ public class AgentTrackingLogCreateService extends AbstractGuiService<Agent, Tra
 
 		TrackingLog trackingLog = new TrackingLog();
 		trackingLog.setClaim(claim);
+		trackingLog.setLastUpdateMoment(currentMoment);
 		trackingLog.setResolutionPercentage(0.0);
 		trackingLog.setStatus(TrackinLogStatus.PENDING);
 
@@ -47,7 +54,7 @@ public class AgentTrackingLogCreateService extends AbstractGuiService<Agent, Tra
 
 	@Override
 	public void bind(final TrackingLog object) {
-		super.bindObject(object, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution");
+		super.bindObject(object, "step", "resolutionPercentage", "status", "resolution");
 	}
 
 	@Override
@@ -73,6 +80,9 @@ public class AgentTrackingLogCreateService extends AbstractGuiService<Agent, Tra
 
 		dataset = super.unbindObject(object, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution");
 		dataset.put("status", choicesStatus);
+
+		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
+		dataset.put("draftMode", object.getClaim().isDraftMode());
 
 		super.getResponse().addData(dataset);
 	}

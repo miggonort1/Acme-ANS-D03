@@ -37,20 +37,24 @@ public class AgentTrackingLogUpdateService extends AbstractGuiService<Agent, Tra
 
 	@Override
 	public void load() {
-		int id = super.getRequest().getData("id", int.class);
-		TrackingLog trackingLog = this.repository.findTrackingLogById(id);
+		TrackingLog object;
+		int id;
 
-		super.getBuffer().addData(trackingLog);
+		id = super.getRequest().getData("id", int.class);
+		object = this.repository.findTrackingLogById(id);
+
+		super.getBuffer().addData(object);
 	}
 
 	@Override
 	public void bind(final TrackingLog object) {
-		super.bindObject(object, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution");
+		assert object != null;
+		super.bindObject(object, "step", "resolutionPercentage", "status", "resolution");
 	}
 
 	@Override
 	public void validate(final TrackingLog object) {
-		super.state(object.getStatus() == TrackinLogStatus.PENDING, "*", "acme.validation.trackinglog.update-published");
+		assert object != null;
 	}
 
 	@Override

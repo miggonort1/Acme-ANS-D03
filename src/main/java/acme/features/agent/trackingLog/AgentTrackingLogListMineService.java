@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.claim.Claim;
 import acme.entities.claim.TrackingLog;
 import acme.realms.Agent;
 
@@ -20,16 +21,24 @@ public class AgentTrackingLogListMineService extends AbstractGuiService<Agent, T
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int claimId;
+		Claim claim;
+
+		claimId = super.getRequest().getData("masterId", int.class);
+		claim = this.repository.findClaimById(claimId);
+		status = claim != null && (!claim.isDraftMode() || super.getRequest().getPrincipal().hasRealm(claim.getAgent()));
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
 		Collection<TrackingLog> trackingLogs;
-		int agentId;
+		int masterId;
 
-		agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		trackingLogs = this.repository.findTrackingLogsByAgentId(agentId);
+		masterId = super.getRequest().getData("masterId", int.class);
+		trackingLogs = this.repository.findTrackingLogsByClaimId(masterId);
 
 		super.getBuffer().addData(trackingLogs);
 	}
@@ -39,7 +48,22 @@ public class AgentTrackingLogListMineService extends AbstractGuiService<Agent, T
 		Dataset dataset;
 
 		dataset = super.unbindObject(object, "lastUpdateMoment", "step", "resolutionPercentage", "status", "resolution");
-
 		super.getResponse().addData(dataset);
+	}
+
+	@Override
+	public void unbind(final Collection<TrackingLog> objects) {
+		assert objects != null;
+
+		int masterId;
+		Claim claim;
+		final boolean showCreate;
+
+		masterId = super.getRequest().getData("masterId", int.class);
+		claim = this.repository.findClaimById(masterId);
+		showCreate = claim.isDraftMode() && super.getRequest().getPrincipal().hasRealm(claim.getAgent());
+
+		super.getResponse().addGlobal("masterId", masterId);
+		super.getResponse().addGlobal("showCreate", showCreate);
 	}
 }

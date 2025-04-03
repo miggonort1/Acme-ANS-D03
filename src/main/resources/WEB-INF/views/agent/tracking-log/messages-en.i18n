@@ -8,18 +8,18 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-agent.trackingLog.list.title= Tracking log
+agent.tracking-log.list.title= Tracking log
 agent.trackingLog.list.button.create=Create
 agent.trackingLog.list.label.step=Step
-agent.trackingLog.list.label.resolutionPorcentage=Resolution porcentage
+agent.trackingLog.list.label.resolutionPercentage=Resolution porcentage
 agent.trackingLog.list.label.status=Status
-agent.trackingLog.form.title=Tracking log
+agent.tracking-log.form.title=Tracking log
 agent.trackingLog.form.label.step=Step
 agent.trackingLog.form.label.lastUpdateMoment=Last update moment
 agent.trackingLog.form.label.resolutionPercentage=Resolution porcentage
 agent.trackingLog.form.label.status=Status
 agent.trackingLog.form.label.resolution=Resolution
-agent.claim.form.button.update=Update
-agent.claim.form.button.create=Create
-agent.claim.form.button.delete=Delete
-agent.claim.form.button.publish=Publish
+agent.trackingLog.form.button.update=Update
+agent.trackingLog.form.button.create=Create
+agent.trackingLog.form.button.delete=Delete
+agent.trackingLog.form.button.publish=Publish
