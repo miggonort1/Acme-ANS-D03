@@ -51,9 +51,9 @@ public class ActivityLog extends AbstractEntity {
 	private int					severityLevel;
 
 	@Mandatory
-	// @Valid
+	//@Valid
 	@Automapped
-	private Boolean				draftMode;
+	private Boolean				draftMode			= true;
 
 	// Relationships ----------------------------------------------------------
 	@Mandatory
