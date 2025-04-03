@@ -15,7 +15,7 @@ import javax.validation.Payload;
 
 public @interface ValidCrewMemberCode {
 
-	String message() default "El código de empleado debe comenzar con las iniciales de la identidad del usuario";
+	String message() default "";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
 }

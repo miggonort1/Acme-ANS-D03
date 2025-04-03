@@ -38,7 +38,7 @@ public class TechnicianMaintenanceRecordListAllService extends AbstractGuiServic
 
 		Dataset dataset;
 
-		dataset = super.unbindObject(object, "inspectionDueDate", "status");
+		dataset = super.unbindObject(object, "inspectionDueDate", "notes");
 
 		super.getResponse().addData(dataset);
 	}
