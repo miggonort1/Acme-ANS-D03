@@ -19,7 +19,7 @@ import acme.client.components.principals.Authenticated;
 import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.realms.Technician;
+import acme.realms.technician.Technician;
 
 @GuiService
 public class AuthenticatedTechnicianUpdateService extends AbstractGuiService<Authenticated, Technician> {
