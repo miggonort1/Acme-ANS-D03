@@ -78,7 +78,7 @@ public class CrewMemberFlightAssignmentPublishService extends AbstractGuiService
 
 		SelectChoices duties = SelectChoices.from(Duty.class, flightAssignment.getDuty());
 		SelectChoices statusChoices = SelectChoices.from(CurrentStatus.class, flightAssignment.getCurrentStatus());
-		SelectChoices legChoices = SelectChoices.from(this.repository.findAllLegsByAirlineId(flightAssignment.getCrewMember().getAirline().getId()), "flightNumber", flightAssignment.getLeg());
+		SelectChoices legs = SelectChoices.from(this.repository.findAllLegsByAirlineId(flightAssignment.getCrewMember().getAirline().getId()), "flightNumber", flightAssignment.getLeg());
 
 		dataset = super.unbindObject(flightAssignment, "duty", "moment", "currentStatus", "remarks", "draftMode", "crewMember", "leg");
 		dataset.put("crewMember", flightAssignment.getCrewMember().getIdentity().getFullName());
@@ -86,8 +86,8 @@ public class CrewMemberFlightAssignmentPublishService extends AbstractGuiService
 		dataset.put("duty", duties.getSelected().getKey());
 		dataset.put("statusChoices", statusChoices);
 		dataset.put("status", statusChoices.getSelected().getKey());
-		dataset.put("legChoices", legChoices);
-		dataset.put("leg", legChoices.getSelected().getKey());
+		dataset.put("legs", legs);
+		dataset.put("leg", legs.getSelected().getKey());
 
 		super.getResponse().addData(dataset);
 	}

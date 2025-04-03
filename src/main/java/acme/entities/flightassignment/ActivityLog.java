@@ -46,7 +46,7 @@ public class ActivityLog extends AbstractEntity {
 	private String				description;
 
 	@Mandatory
-	@ValidNumber(min = 0, max = 10)
+	@ValidNumber(min = 0, max = 10, message = "{validation.activityLog.severityLevelOutOfRange}")
 	@Automapped
 	private int					severityLevel;
 

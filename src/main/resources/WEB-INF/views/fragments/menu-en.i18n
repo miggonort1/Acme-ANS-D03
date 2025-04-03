@@ -51,6 +51,8 @@ master.menu.manager.my-flights = My flights
 master.menu.customer = Customer
 master.menu.customer.bookings = Bookings
 master.menu.customer.passengers = Passengers
+
+
 # master.menu.crew-member ####################################################
 master.menu.crew-member = Crew Member
 master.menu.crew-member.flight-assignments-completed= Flight Assignments Completed
