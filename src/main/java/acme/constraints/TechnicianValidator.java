@@ -1,14 +1,14 @@
 
 package acme.constraints;
 
+import java.util.regex.Pattern;
+
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acme.client.components.principals.DefaultUserIdentity;
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
-import acme.client.helpers.StringHelper;
 import acme.realms.technician.Technician;
 import acme.realms.technician.TechnicianRepository;
 
@@ -47,13 +47,8 @@ public class TechnicianValidator extends AbstractValidator<ValidTechnician, Tech
 				boolean licenseNumberValid;
 
 				String licenseNumber = technician.getLicenseNumber();
-				DefaultUserIdentity identity = technician.getUserAccount().getIdentity();
-				String name = identity.getName().trim();
-				String surname = identity.getSurname().trim();
 
-				String initials = "" + name.charAt(0) + surname.charAt(0);
-
-				licenseNumberValid = StringHelper.startsWith(licenseNumber, initials, true);
+				licenseNumberValid = licenseNumber != null && Pattern.matches("^[A-Z]{2,3}\\d{6}$", licenseNumber);
 
 				super.state(context, licenseNumberValid, "licenseNumber", "{acme.validation.technician.license-number.message}");
 			}
