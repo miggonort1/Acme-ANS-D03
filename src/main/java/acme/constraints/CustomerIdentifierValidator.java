@@ -3,17 +3,20 @@ package acme.constraints;
 
 import javax.validation.ConstraintValidatorContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
+import acme.client.helpers.StringHelper;
 import acme.realms.Customer;
+import acme.realms.CustomerRepository;
 
 @Validator
 public class CustomerIdentifierValidator extends AbstractValidator<ValidCustomerIdentifier, Customer> {
 
-	@Override
-	protected void initialise(final ValidCustomerIdentifier constraintAnnotation) {
-		assert constraintAnnotation != null;
-	}
+	@Autowired
+	private CustomerRepository repository;
+
 
 	@Override
 	public boolean isValid(final Customer customer, final ConstraintValidatorContext context) {
@@ -22,32 +25,39 @@ public class CustomerIdentifierValidator extends AbstractValidator<ValidCustomer
 
 		boolean result;
 
-		if (customer.getUserAccount() == null)
+		if (customer == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
-			String initials = this.getInitials(customer);
-			String identifier = customer.getIdentifier();
+			{
+				boolean uniqueCustomerIdentifier;
+				Customer existingCustomer;
 
-			if (identifier == null)
-				super.state(context, false, "identifier", "javax.validation.constraints.NotNull.message");
-			else if (!identifier.startsWith(initials))
-				super.state(context, false, "identifier", "acme.constraints.ValidCustomerIdentifier.message");
+				existingCustomer = this.repository.findCustomerByIdentifier(customer.getIdentifier());
+				uniqueCustomerIdentifier = existingCustomer == null || existingCustomer.equals(customer);
 
+				super.state(context, uniqueCustomerIdentifier, "customers", "acme.validation.customer.identifier.unique.message");
+			}
+			{
+				boolean identifierCorrectSyntax;
+				String name = customer.getIdentity().getName().trim();
+				String surname = customer.getIdentity().getSurname().trim();
+				if (!StringHelper.isBlank(name) && !StringHelper.isBlank(surname)) {
+					String initials = "" + name.charAt(0) + surname.charAt(0);
+
+					String identifier = customer.getIdentifier().trim();
+					String identifierPrefix = identifier.substring(0, initials.length());
+
+					identifierCorrectSyntax = initials.equals(identifierPrefix);
+					super.state(context, identifierCorrectSyntax, "customers", "acme.validation.customer.identifier.syntax.message");
+				} else
+					super.state(context, false, "customers", "acme.validation.customer.identifier.syntax.message");
+
+			}
 		}
+
 		result = !super.hasErrors(context);
+
 		return result;
-	}
-
-	private String getInitials(final Customer customer) {
-
-		String initials = "";
-		String name = customer.getUserAccount().getIdentity().getName().trim();
-		String surname = customer.getUserAccount().getIdentity().getSurname().trim();
-
-		if (name != null && surname != null)
-			initials = name.substring(0, 1) + surname.substring(0, 1);
-
-		return initials;
 	}
 
 }
