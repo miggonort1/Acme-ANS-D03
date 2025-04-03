@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import acme.client.components.basis.AbstractForm;
-import acme.entities.flightasignment.ActivityLog;
-import acme.entities.flightasignment.CurrentStatus;
-import acme.entities.flightasignment.FlightAssignment;
+import acme.datatypes.CrewMemberStatistics;
+import acme.entities.flightassignment.CurrentStatus;
 import acme.realms.CrewMember;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,22 +17,21 @@ public class CrewMemberDashboard extends AbstractForm {
 
 	// Serialisation version --------------------------------------------------
 
-	private static final long				serialVersionUID	= 1L;
+	private static final long		serialVersionUID	= 1L;
 
 	// Attributes -------------------------------------------------------------
 
-	List<String>							lastFiveDestinationsAssigned;
+	List<String>					lastFiveDestinationsAssigned;
 
-	Map<ActivityLog, Integer>				numberLegsWithEachIncidentSeverityRange; // revisar
+	private Integer					legsWithIncidentSeverity3;
+	private Integer					legsWithIncidentSeverity7;
+	private Integer					legsWithIncidentSeverity10;
 
-	List<CrewMember>						crewMembersAssignedLastLeg;
+	List<CrewMember>				crewMembersAssignedLastLeg;
 
-	Map<FlightAssignment, CurrentStatus>	flightAssignmentGroupedByStatus;
+	Map<CurrentStatus, Integer>		flightAssignmentGroupedByStatus;
 
-	Double									averageOfNumberOfFlightAssignmentLastMonth;
-	Double									minimumNumberOfNumberOfFlightAssignmentLastMonth;
-	Double									maximumNumberOfNumberOfFlightAssignmentLastMonth;
-	Double									standardDeviationNumberOfFlightAssignmentLastMonth;
+	private CrewMemberStatistics	flightAssignmentsStatsLastMonth;
 
 	// Derived attributes -----------------------------------------------------
 
