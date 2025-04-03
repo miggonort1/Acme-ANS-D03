@@ -55,7 +55,7 @@ public class CrewMemberActivityLogDeleteService extends AbstractGuiService<CrewM
 
 	@Override
 	public void unbind(final ActivityLog object) {
-		Dataset dataset = super.unbindObject(object, "registrationMoment", "typeOfIncident", "description", "severityLevel", "draftMode");
+		Dataset dataset = super.unbindObject(object, "registrationMoment", "incidentType", "description", "severityLevel", "draftMode");
 
 		if (object.getFlightAssignment().getLeg().getScheduledArrival().before(MomentHelper.getCurrentMoment()))
 			super.getResponse().addGlobal("showAction", true);
