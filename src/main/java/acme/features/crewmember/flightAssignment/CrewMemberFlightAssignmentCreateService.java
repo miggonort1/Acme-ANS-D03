@@ -48,11 +48,10 @@ public class CrewMemberFlightAssignmentCreateService extends AbstractGuiService<
 	public void bind(final FlightAssignment assignment) {
 		int legId = super.getRequest().getData("leg", int.class);
 		Leg leg = this.repository.findLegById(legId);
-		int crewMemberId = super.getRequest().getData("member", int.class);
-		CrewMember crewMember = this.crewMemberRepository.findCrewMemberById(crewMemberId);
 
-		super.bindObject(assignment, "duty", "status", "remarks");
+		super.bindObject(assignment, "duty", "currentStatus", "remarks");
 		assignment.setLeg(leg);
+		CrewMember crewMember = (CrewMember) super.getRequest().getPrincipal().getActiveRealm();
 		assignment.setCrewMember(crewMember);
 		assignment.setMoment(MomentHelper.getCurrentMoment());
 	}
@@ -72,14 +71,14 @@ public class CrewMemberFlightAssignmentCreateService extends AbstractGuiService<
 		Dataset dataset;
 		CrewMember crewMember = (CrewMember) super.getRequest().getPrincipal().getActiveRealm();
 
-		SelectChoices currentStatus = SelectChoices.from(CurrentStatus.class, flightAssignment.getCurrentStatus());
+		SelectChoices statusChoices = SelectChoices.from(CurrentStatus.class, flightAssignment.getCurrentStatus());
 		SelectChoices duties = SelectChoices.from(Duty.class, flightAssignment.getDuty());
 		SelectChoices legChoices = SelectChoices.from(this.repository.findAllLegsByAirlineId(crewMember.getAirline().getId()), "flightNumber", flightAssignment.getLeg());
 
-		dataset = super.unbindObject(flightAssignment, "duty", "currentStatus", "moment", "remarks", "draftMode", "crewMember", "leg");
+		dataset = super.unbindObject(flightAssignment, "duty", "currentStatus", "moment", "remarks", "draftMode", "leg");
 		dataset.put("crewMember", crewMember.getIdentity().getFullName());
-		dataset.put("status", currentStatus.getSelected().getKey());
-		dataset.put("currentStatus", currentStatus);
+		dataset.put("statusChoices", statusChoices);
+		dataset.put("currentStatus", statusChoices.getSelected().getKey());
 		dataset.put("duties", duties);
 		dataset.put("duty", duties.getSelected().getKey());
 		dataset.put("legs", legChoices);

@@ -7,7 +7,6 @@ import java.util.Map;
 import acme.client.components.basis.AbstractForm;
 import acme.datatypes.CrewMemberStatistics;
 import acme.entities.flightassignment.CurrentStatus;
-import acme.realms.CrewMember;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +26,7 @@ public class CrewMemberDashboard extends AbstractForm {
 	private Integer					legsWithIncidentSeverity7;
 	private Integer					legsWithIncidentSeverity10;
 
-	List<CrewMember>				crewMembersAssignedLastLeg;
+	List<String>					crewMembersAssignedLastLeg;
 
 	Map<CurrentStatus, Integer>		flightAssignmentGroupedByStatus;
 

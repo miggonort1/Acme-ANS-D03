@@ -74,7 +74,7 @@
             <acme:print code="crew-member.crew-member-dashboard.form.label.flightAssignmentsGroupedByStatus"/>
         </th>
     </tr>
-    <c:forEach var="entry" items="${flightAssignmentsGroupedByStatus}">
+    <c:forEach var="entry" items="${flightAssignmentGroupedByStatus}">
         <tr>
             <td><acme:print value = "${entry.key}: ${entry.value}"/></td>
         </tr>
